@@ -1,6 +1,6 @@
 # Minimal Hugo configuration. The design (colours, fonts, sizes) is NOT here:
 # it lives in data/design.json, which the Design Studio edits.
-baseURL = "http://localhost:1313/"
+baseURL = "https://hugo-starter.krabben.workers.dev/"
 title = "Starter Site"
 defaultContentLanguage = "en"
 
