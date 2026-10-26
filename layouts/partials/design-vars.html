@@ -1,0 +1,13 @@
+{{- /*
+  Turns every key in data/design.json into a CSS custom property on :root and
+  publishes it as a separate stylesheet file (css/design.css).
+  "accent": "#0c447c"  becomes  --accent:#0c447c;
+  A file instead of an inline <style> block keeps this working under a strict
+  Content-Security-Policy (style-src 'self'). This is the ONLY link between the
+  Design Studio and the stylesheet.
+*/ -}}
+{{ $vars := slice }}
+{{ range $k, $v := hugo.Data.design }}{{ $vars = $vars | append (printf "--%s:%s;" $k $v) }}{{ end }}
+{{ $css := printf ":root{%s}" (delimit $vars "") | resources.FromString "css/design.css" }}
+{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

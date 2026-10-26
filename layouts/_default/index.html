@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{ $stories := where site.RegularPages "Section" "stories" }}
+{{ $heroes := first 4 (where $stories "Params.hero" true) }}
+{{ if not $heroes }}{{ $heroes = first 1 $stories }}{{ end }}
+{{ $heroIDs := slice }}{{ range $heroes }}{{ $heroIDs = $heroIDs | append .RelPermalink }}{{ end }}
+
+{{ if $heroes }}
+<section class="hero" data-rotator aria-roledescription="carousel" aria-label="Top stories">
+  {{ range $i, $p := $heroes }}
+  <div class="hero__slide{{ if eq $i 0 }} is-active{{ end }}">{{ partial "card-hero.html" $p }}</div>
+  {{ end }}
+  {{ if gt (len $heroes) 1 }}
+  <div class="hero__dots">{{ range $i, $p := $heroes }}<button type="button" class="hero__dot{{ if eq $i 0 }} is-active{{ end }}" aria-label="Story {{ add $i 1 }}"></button>{{ end }}</div>
+  {{ end }}
+</section>
+{{ end }}
+
+<h2 class="section-title">Latest</h2>
+<div class="grid">
+  {{ range $stories }}{{ if not (in $heroIDs .RelPermalink) }}{{ partial "card.html" . }}{{ end }}{{ end }}
+</div>
+{{ end }}
+{{ define "scripts" }}
+{{ $js := resources.Get "js/rotator.js" }}
+{{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}

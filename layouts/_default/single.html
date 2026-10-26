@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ $cover := .Resources.GetMatch "cover.*" }}
+<article class="story">
+  {{ with .Params.tags }}{{ partial "tag.html" (index . 0) }}{{ end }}
+  <h1 class="story__title">{{ .Title }}</h1>
+  {{ with .Params.summary }}<p class="story__lede">{{ . }}</p>{{ end }}
+  {{ partial "byline.html" . }}
+  {{ with $cover }}{{ $img := .Resize "1200x q80" }}<figure class="story__photo"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt=""></figure>{{ end }}
+  <div class="story__text">{{ .Content }}</div>
+</article>
+{{ end }}

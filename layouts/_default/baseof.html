@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap masthead__in">
+    <a class="masthead__title" href="{{ "/" | relLangURL }}">{{ site.Title }}</a>
+    <nav class="masthead__nav" aria-label="Main">
+      {{ range site.Taxonomies.tags.Alphabetical | first 5 }}<a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>{{ end }}
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+{{ block "main" . }}{{ end }}
+</main>
+<footer class="foot wrap">© {{ now.Year }} {{ site.Title }} · Design driven by <code>data/design.json</code></footer>
+{{ block "scripts" . }}{{ end }}
+</body>
+</html>

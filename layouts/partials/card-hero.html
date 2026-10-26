@@ -1,0 +1,13 @@
+{{- /* Large card for the rotating hero on the home page. */ -}}
+{{ $cover := .Resources.GetMatch "cover.*" }}
+<article class="card card--hero{{ if not $cover }} card--text{{ end }}">
+  {{ with $cover }}{{ $img := .Resize "1200x q80" }}
+  <a class="card__media" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt=""></a>
+  {{ end }}
+  <div class="card__body">
+    {{ with .Params.tags }}{{ partial "tag.html" (index . 0) }}{{ end }}
+    <h2 class="card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ with .Params.summary }}<p class="card__excerpt">{{ . }}</p>{{ end }}
+    {{ partial "byline.html" . }}
+  </div>
+</article>

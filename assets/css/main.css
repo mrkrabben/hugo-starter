@@ -1,0 +1,64 @@
+/* Every visual value comes from a CSS variable printed from data/design.json.
+   The second argument is the fallback if a token is missing. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg,#f6f5f1);color:var(--fg,#1d1d1b);font-family:var(--font-body,system-ui,sans-serif);line-height:1.55}
+a{color:inherit}
+.wrap{max-width:var(--page-width,1100px);margin:0 auto;padding:0 1rem}
+.masthead{border-bottom:3px double var(--fg,#1d1d1b);margin-bottom:1.5rem}
+.masthead__in{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding-top:1rem;padding-bottom:.8rem;flex-wrap:wrap}
+.masthead__title{font-family:var(--font-head,Georgia,serif);font-size:2rem;font-weight:700;text-decoration:none;color:var(--accent,#0c447c)}
+.masthead__nav{display:flex;gap:1rem;font-size:.9rem}
+.masthead__nav a{text-decoration:none;color:var(--muted,#6b6a65)}
+.masthead__nav a:hover{color:var(--accent,#0c447c)}
+.section-title{font-family:var(--font-head,Georgia,serif);border-bottom:1px solid var(--muted,#6b6a65);padding-bottom:.3rem;margin:2rem 0 1rem}
+.foot{margin:3rem auto 2rem;color:var(--muted,#6b6a65);font-size:.85rem}
+
+/* tag pill */
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:.15rem .6rem;border-radius:99px;background:var(--tag-bg,#e6f1fb);color:var(--tag-fg,#0c447c)}
+.tag--breaking{background:var(--tag-breaking-bg,var(--tag-bg,#e6f1fb));color:var(--tag-breaking-fg,var(--tag-fg,#0c447c))}
+.tag--science{background:var(--tag-science-bg,var(--tag-bg,#e6f1fb));color:var(--tag-science-fg,var(--tag-fg,#0c447c))}
+.tag--culture{background:var(--tag-culture-bg,var(--tag-bg,#e6f1fb));color:var(--tag-culture-fg,var(--tag-fg,#0c447c))}
+.tag--society{background:var(--tag-society-bg,var(--tag-bg,#e6f1fb));color:var(--tag-society-fg,var(--tag-fg,#0c447c))}
+.tag--technology{background:var(--tag-technology-bg,var(--tag-bg,#e6f1fb));color:var(--tag-technology-fg,var(--tag-fg,#0c447c))}
+
+/* byline */
+.byline{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;font-size:.82rem;color:var(--muted,#6b6a65);margin-top:.6rem}
+.avatar{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent,#0c447c);color:#fff;font-size:.65rem;font-weight:700}
+.byline__name{color:var(--fg,#1d1d1b);font-weight:600}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}
+.card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-card,8px);overflow:hidden;display:flex;flex-direction:column}
+.card__media img{display:block;width:100%;height:auto}
+.card__body{padding:1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.45rem}
+.card__title{margin:0;font-family:var(--font-head,Georgia,serif);font-size:var(--text-card,1.05rem);line-height:1.25}
+.card__title a{text-decoration:none}
+.card__title a:hover{color:var(--accent,#0c447c)}
+.card__excerpt{margin:0;color:var(--muted,#6b6a65);font-size:.92rem}
+.card--text{border-left:4px solid var(--accent,#0c447c)}
+.card--row{flex-direction:row}
+.card--row .card__media{flex:0 0 120px}
+.card--row .card__media img{height:100%;object-fit:cover}
+
+/* hero rotator */
+.hero{position:relative}
+.hero__slide{display:none}
+.hero__slide.is-active{display:block}
+.card--hero{display:grid;grid-template-columns:1.4fr 1fr}
+.card--hero .card__body{padding:1.5rem;justify-content:center}
+.card--hero .card__title{font-size:var(--text-hero,2rem);line-height:1.15}
+.card--hero .card__excerpt{font-size:1.05rem}
+.card--hero.card--text{grid-template-columns:1fr}
+.card--hero .card__media img{height:100%;object-fit:cover}
+.hero__dots{display:flex;gap:.4rem;justify-content:center;margin-top:.7rem}
+.hero__dot{width:.7rem;height:.7rem;padding:0;border-radius:50%;border:1px solid var(--accent,#0c447c);background:transparent;cursor:pointer}
+.hero__dot.is-active{background:var(--accent,#0c447c)}
+@media (max-width:760px){.card--hero{grid-template-columns:1fr}.card--hero .card__title{font-size:calc(var(--text-hero,2rem)*.8)}}
+
+/* story page */
+.story{max-width:720px;margin:0 auto}
+.story__title{font-family:var(--font-head,Georgia,serif);font-size:calc(var(--text-hero,2rem)*1.3);line-height:1.1;margin:.6rem 0}
+.story__lede{font-size:1.2rem;color:var(--muted,#6b6a65);margin:0 0 .5rem}
+.story__photo{margin:1.2rem 0}
+.story__photo img{width:100%;height:auto;border-radius:var(--radius-card,8px)}
+.story__text{font-size:1.08rem}

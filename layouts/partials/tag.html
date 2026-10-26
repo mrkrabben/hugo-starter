@@ -1,0 +1,3 @@
+{{- /* Tag pill. Input: a tag string, e.g. "Culture". Colour comes from --tag-<slug>-bg/-fg, else --tag-bg/-fg. */ -}}
+{{ $slug := . | urlize }}
+<a class="tag tag--{{ $slug }}" href="{{ printf "/tags/%s/" $slug | relLangURL }}">{{ . }}</a>

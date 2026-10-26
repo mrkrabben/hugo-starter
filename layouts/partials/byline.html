@@ -1,0 +1,14 @@
+{{- /* Byline. Input: a page. Needs front matter "author"; uses the page date and reading time. */ -}}
+{{ with .Params.author }}
+{{ $parts := split . " " }}
+{{ $initials := substr (index $parts 0) 0 1 }}
+{{ if gt (len $parts) 1 }}{{ $initials = printf "%s%s" $initials (substr (index $parts (sub (len $parts) 1)) 0 1) }}{{ end }}
+<div class="byline">
+  <span class="avatar" aria-hidden="true">{{ upper $initials }}</span>
+  <span class="byline__name">{{ . }}</span>
+  <span class="byline__sep" aria-hidden="true">·</span>
+  <span>{{ $.ReadingTime }} min</span>
+  <span class="byline__sep" aria-hidden="true">·</span>
+  <time datetime="{{ $.Date.Format "2006-01-02" }}">{{ $.Date.Format "2 Jan 2006" }}</time>
+</div>
+{{ end }}
